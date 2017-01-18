@@ -9,7 +9,7 @@ module GrapeMarkdown
              to: '__getobj__'
 
     def root_resource
-      route_namespace.split('/').reject(&:empty?).first
+      namespace.split('/').reject(&:empty?).first
     end
 
     def root_resource_title
@@ -23,8 +23,8 @@ module GrapeMarkdown
     end
 
     def route_name
-      route_namespace.split('/').last ||
-        route_path.match('\/(\w*?)[\.\/\(]').captures.first
+      namespace.split('/').last ||
+        path.match('\/(\w*?)[\.\/\(]').captures.first
     end
 
     def route_title
@@ -44,7 +44,7 @@ module GrapeMarkdown
     end
 
     def route_path_without_format
-      route_path.gsub(/\((.*?)\)/, '')
+      path.gsub(/\((.*?)\)/, '')
     end
 
     def route_type
@@ -52,7 +52,7 @@ module GrapeMarkdown
     end
 
     def list?
-      route_method == 'GET' && !route_path.include?(':id')
+      route_method == 'GET' && !path.include?(':id')
     end
 
     def route_binding
